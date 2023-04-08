@@ -1,6 +1,6 @@
 const SPEECH_REC = webkitSpeechRecognition  //  chrome and safari
 let SPEECH_REC_EVENT
-if (!('webkitSpeechRecognition' in window)) {
+if (!('webkitSpeechRecognitionEvent' in window)) {
     SPEECH_REC_EVENT = SpeechRecognitionEvent;
 } else {
     SPEECH_REC_EVENT = webkitSpeechRecognitionEvent; // chrome
