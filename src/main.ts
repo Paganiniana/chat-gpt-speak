@@ -35,24 +35,27 @@ function think() {
   showThinking()
 }
 
+function handleSpace() {
+  if (!IS_LISTENING && !IS_SPEAKING && !IS_THINKING) {
+    listen();
+    return;
+  }
+  if (IS_LISTENING) {
+    stopListening();
+    return;
+  }
+  if (IS_SPEAKING) {
+    wait()
+    return;
+  }
+}
 
 window.addEventListener("keydown", (e) => {
   let isSpace = e.key.toLowerCase() == "space" || e.code.toLowerCase() == "space";
-  if (isSpace) {
-    if (!IS_LISTENING && !IS_SPEAKING && !IS_THINKING) {
-      listen();
-      return;
-    }
-    if (IS_LISTENING) {
-      stopListening();
-      return;
-    }
-    if (IS_SPEAKING) {
-      wait()
-      return;
-    }
-  }
+  if (isSpace) handleSpace();
 })
+
+window.addEventListener("touchstart", handleSpace);
 
 
 

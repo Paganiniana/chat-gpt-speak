@@ -1,17 +1,22 @@
-const synth = window.speechSynthesis;
-const synthVoice = getVoice();
+
+
 
 const PITCH_SYNTH = 1;
 const RATE_SYNTH = 1;
 
+
 function getVoice() {
+    let synth = window.speechSynthesis;
     let voices = synth.getVoices();
-    if (navigator.userAgent.toLowerCase().includes("safari"))
-        return 
+    let ua = navigator.userAgent.toLowerCase()
+    if (ua.includes("safari") && !ua.includes("chrome"))
+        return
     return voices.find(v => v.lang == "en-GB") as SpeechSynthesisVoice;
 }
 
 export function speak(text:string) {
+    let synth = window.speechSynthesis;
+    let synthVoice = getVoice();    
     synth.cancel();
     return new Promise((res, rej) => {
         console.log(`Speaking: ${text}`);
